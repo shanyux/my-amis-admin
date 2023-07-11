@@ -40,17 +40,18 @@
                 body: {
                     type: 'form',
                     mode: 'horizontal',
-                    api: '/saveForm',
+                    api: '/api/admin/v1/account/login',
+                    redirect: "/",
                     body: [
                         {
                             label: 'Name',
                             type: 'input-text',
-                            name: 'name'
+                            name: 'user_name'
                         },
                         {
-                            label: 'Email',
-                            type: 'input-email',
-                            name: 'email'
+                            label: 'Passwd',
+                            type: 'input-password',
+                            name: 'password'
                         }
                     ]
                 }
