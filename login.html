@@ -40,26 +40,23 @@
                 "body": {
                     "type": 'form',
                     "mode": 'horizontal',
-                    "horizontal": {
-                        "leftFixed": true
-                    },
                     "submitText": "登录",
                     "api": {
                         "method": "post",
                         "url": "/api/admin/v1/account/login",
-                        "adaptor": function (payload, response) {
-                            if (payload.status === 0) {
-                                let newDate = new Date();//获取当前的时间对象
-                                let nowTimeStamp = newDate.getTime();//获取当前时间对象的时间戳
-                                nowTimeStamp += (3600);
-                                newDate.setTime(nowTimeStamp);
-                                let expires = "expires=" + newDate.toGMTString();
-                                document.cookie = `username=${payload.data.username};${expires};`;
-                            }
-                            return payload
+                        "adaptor": function (payload, response, api, context) {
+                            console.log(context); // 打印上下文数据
+                            return {
+                                ...payload,
+                                status: payload.code === 200 ? 0 : payload.code
+                            };
                         },
+                        "messages": {
+                            "success": "登录成功",
+                            // "failed": payload.msg
+                        }
                     },
-                    "redirect": "/",
+                    "redirect": "${redirect_url}",
                     "body": [
                         {
                             "label": 'Name',

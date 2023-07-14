@@ -17,3 +17,5 @@ npm start
 ## 部署上线
 
 这个例子中的 amis 等依赖使用外部 cdn，为了稳定请在自己部署的时候将文件下载到本地。
+
+pm2 start npm --name "amis" -- start

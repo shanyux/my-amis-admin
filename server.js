@@ -19,9 +19,13 @@ app.use('/sdk', express.static('sdk'));
 app.get('/login', function (req, res) {
   res.sendFile(path.join(__dirname, 'login.html'));
 });
+app.get('/main', function (req, res) {
+  res.sendFile(path.join(__dirname, 'main.html'));
+});
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
+
 
 const server = http.createServer(app);
 
