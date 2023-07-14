@@ -35,16 +35,19 @@
             let amis = amisRequire('amis/embed');
             // 通过替换下面这个配置来生成不同页面
             let amisJSON = {
-                type: 'page',
-                title: '表单页面',
-                body: {
-                    type: 'form',
-                    mode: 'horizontal',
-                    submitText: "登录",
-                    api: {
-                        method: "post",
-                        url: "/api/admin/v1/account/login",
-                        adaptor: function (payload, response) {
+                "type": 'page',
+                "title": '用户登录',
+                "body": {
+                    "type": 'form',
+                    "mode": 'horizontal',
+                    "horizontal": {
+                        "leftFixed": true
+                    },
+                    "submitText": "登录",
+                    "api": {
+                        "method": "post",
+                        "url": "/api/admin/v1/account/login",
+                        "adaptor": function (payload, response) {
                             if (payload.status === 0) {
                                 let newDate = new Date();//获取当前的时间对象
                                 let nowTimeStamp = newDate.getTime();//获取当前时间对象的时间戳
@@ -56,17 +59,21 @@
                             return payload
                         },
                     },
-                    redirect: "/",
-                    body: [
+                    "redirect": "/",
+                    "body": [
                         {
-                            label: 'Name',
-                            type: 'input-text',
-                            name: 'user_name'
+                            "label": 'Name',
+                            "type": 'input-text',
+                            "name": 'user_name',
+                            "required": true,
+                            "placeholder": "请输入用户名"
                         },
                         {
-                            label: 'Passwd',
-                            type: 'input-password',
-                            name: 'password'
+                            "label": 'Passwd',
+                            "type": 'input-password',
+                            "name": 'password',
+                            "placeholder": "请输入密码",
+                            "required": true
                         }
                     ]
                 }
