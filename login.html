@@ -35,45 +35,119 @@
             let amis = amisRequire('amis/embed');
             // 通过替换下面这个配置来生成不同页面
             let amisJSON = {
-                "type": 'page',
-                "title": '用户登录',
-                "body": {
-                    "type": 'form',
-                    "mode": 'horizontal',
-                    "submitText": "登录",
-                    "api": {
-                        "method": "post",
-                        "url": "/api/admin/v1/account/login",
-                        "adaptor": function (payload, response, api, context) {
-                            console.log(context); // 打印上下文数据
-                            return {
-                                ...payload,
-                                status: payload.code === 200 ? 0 : payload.code
-                            };
-                        },
-                        "messages": {
-                            "success": "登录成功",
-                            // "failed": payload.msg
-                        }
+                "type": "page",
+                "title": "用户登录",
+                "body": [
+                    {
+                        "type": "html",
+                        "html": "<div style=\"display: flex; justify-content: center; align-items: center; margin: 96px 0px 8px;\"><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAABYBAMAAACDuy0HAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAkUExURQuQ9A+M7hCM7xCM7hCM7hCM7w+M7hCM7hCM7xCM7w+M7hCM7p2RGX4AAAALdFJOUwHxFtl5wi6YRq9emx6XmgAAA0VJREFUSMeNV89rGkEU3m6sVXNKK6TEiweLhJ56C/HikqN3EbwEihRv7RZKIRchBHq2EChesvgXiC5mmX+u+2Pem/fezLo7Bw/6OTPv+773YzzPsVp/97+9mqs1Ukrd1MTOVbamdbD+gyrW9xrgQGOP/Wrso8bG99XYpcbuX6qxQ43dhdXYTk+D1zUJVpTkaFaGbW40tgvfLErP8IOeIC2PYOwEbyVpjfzP+9UJgpG0jo4gsdW5BtJA5eZcyRBgDZQgDS1iOxAJvpEWsWlHgq9ktHoRSvB6SNoCIoCoV5aDkbQhnr+U28D1dmNGcLpSsZ/4Bb/CNqEzAthq6iTCR4vkR/tzcu5EUg8RJDqCNkTU95pSp0ifFAMBAE4z+J3QaSEtQk3+lus0lBZBXrNozww4DaFh5RWEdMiiPSei7v+MDMHcuEW0GXg34k4wFllyuTNw3OHoS2lc0DYHewyd3AvZsYp8zsFGR+Kw1heqtNk5PbEn7YTGvUUvZzsnNJZQEow++GbAWrtpaekdxgTsRfRIu4pcFOAjbnaQeUUtwsHNf31ZesekDsaFgrKeoUVYtAVY1jMkDS0S5WJpIyWsgzxIggs7xeA62psiaREtAeysdqb6fVKieoK4ibHQzOOsIcFom4SYYs2uYedgrt21Ev0348nk4EZRsKmCY7OZlYPoCggfS8VwJplR2slZn1Il7QMPvTN+w4sd3d1ZhWe4Mwm567TIc16LYqupzBzN49bjYFPz1padstMKcLsvG6Em0P9B86oAn3etFrvifOaya7AxYkCLjPgrgNNYhY8v+9h34FJt9HMoB47kTjaldi7Km/TzwnaYKFz+BMEmBxs9huV5ddRtIpE1wBp/suIPYsh8s8cfpV69ljxxW1qm3xu+ZEU0ZRqiTmloKGet3b1IPj86sypzkMnBCU+MQPaHzkikOvkR/WXKCgYgZSfXOpQNcCo8NVAJQafOUY1/O3IPdgPHeSyv3OPl2BrKHE+FJ0lgIGWnK+I/bq35j60JnbqQ4JJnBRaxKzfBJQ+E2UC5qCwRoecmWJRNnoPd0++rBcUmVW+xR1LpV5XPwUBZWp5Ab8TMWOdZ+lzvEduZ18eme//88Mv1/X8KQ6zq3Tt8/QAAAABJRU5ErkJggg==\" alt=\"logo\" style=\"margin-right: 8px; width: 48px;\"><span style=\"font-size: 32px; font-weight: bold;\">Xiugou Admin</span></div><div style=\"width: 100%; text-align: center; color: rgba(0, 0, 0, 0.45); margin-bottom: 40px;\">Amis是一个低代码前端框架，可以减少页面开发工作量，极大提升效率<br/><span style=\"color: red;\">"
                     },
-                    "redirect": "${redirect_url}",
-                    "body": [
-                        {
-                            "label": 'Name',
-                            "type": 'input-text',
-                            "name": 'user_name',
-                            "required": true,
-                            "placeholder": "请输入用户名"
-                        },
-                        {
-                            "label": 'Passwd',
-                            "type": 'input-password',
-                            "name": 'password',
-                            "placeholder": "请输入密码",
-                            "required": true
-                        }
-                    ]
-                }
+                    {
+                        "type": "grid",
+                        "valign": "middle",
+                        "align": "center",
+                        "columns": [
+                            {
+                                "lg": 3,
+                                "md": 6,
+                                "valign": "middle",
+                                "body": [
+                                    {
+                                        "type": 'form',
+                                        "mode": 'horizontal',
+                                        "horizontal": {
+                                            "left": 3,
+                                            "right": 9
+                                        },
+                                        "title": "登录",
+                                        "submitText": "登录",
+                                        "api": {
+                                            "method": "post",
+                                            "url": "/api/admin/v1/account/login",
+                                            "adaptor": function (payload, response, api, context) {
+                                                console.log(context); // 打印上下文数据
+                                                return {
+                                                    ...payload,
+                                                    status: payload.code === 200 ? 0 : payload.code
+                                                };
+                                            },
+                                            "messages": {
+                                                "success": "登录成功",
+                                                // "failed": payload.msg
+                                            }
+                                        },
+                                        "redirect": "${redirect_url}",
+                                        "body": [
+                                            {
+                                                "label": 'Name',
+                                                "type": 'input-text',
+                                                "name": 'user_name',
+                                                "required": true,
+                                                "placeholder": "请输入用户名"
+                                            },
+                                            {
+                                                "label": 'Passwd',
+                                                "type": 'input-password',
+                                                "name": 'password',
+                                                "placeholder": "请输入密码",
+                                                "required": true
+                                            }
+                                        ]
+
+                                        // "title": "",
+                                        // "submitText": "登录",
+                                        // "body": [
+                                        //     {
+                                        //         "type": "input-text",
+                                        //         "name": "username",
+                                        //         "label": "用户名",
+                                        //         // "value": "admin",
+                                        //         "required": true,
+                                        //         "maxLength": 32
+                                        //     },
+                                        //     {
+                                        //         "type": "input-password",
+                                        //         "name": "password",
+                                        //         "label": "密码",
+                                        //         // "value": "admin",
+                                        //         "required": true,
+                                        //         "maxLength": 128
+                                        //     }
+                                        // ],
+                                        // "actions": [
+                                        //     {
+                                        //         "type": "button-toolbar",
+                                        //         "buttons": [
+                                        //             {
+                                        //                 "type": "button",
+                                        //                 "actionType": "link",
+                                        //                 "label": "注册",
+                                        //                 "link": "/admin/auth/form/reg"
+                                        //             },
+                                        //             {
+                                        //                 "type": "button",
+                                        //                 "actionType": "submit",
+                                        //                 "label": "登录",
+                                        //                 "level": "primary"
+                                        //             }
+                                        //         ]
+                                        //     }
+                                        // ],
+                                        // "actionsClassName": "no-border m-none p-none",
+                                        // "wrapWithPanel": true,
+                                        // "panelClassName": "",
+                                        // "api": {
+                                        //     "url": "/admin/auth/form/login/api",
+                                        //     "method": "POST"
+                                        // },
+                                        // "silentPolling": false,
+                                        // "redirect": "http://user-auth.demo.amis.work/admin/"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
             };
             let amisScoped = amis.embed('#root', amisJSON);
         })();
