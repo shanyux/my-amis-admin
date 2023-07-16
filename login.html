@@ -68,12 +68,12 @@
                                                 console.log(context); // 打印上下文数据
                                                 return {
                                                     ...payload,
-                                                    status: payload.code === 200 ? 0 : payload.code
+                                                    status: payload.code === 0 ? 0 : payload.code
                                                 };
                                             },
                                             "messages": {
                                                 "success": "登录成功",
-                                                // "failed": payload.msg
+                                                // "failed": payload,
                                             }
                                         },
                                         "redirect": "${redirect_url}",

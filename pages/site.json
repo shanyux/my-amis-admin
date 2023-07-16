@@ -26,7 +26,27 @@
                 "schema": {
                   "type": "page",
                   "title": "页面A-1",
-                  "body": "页面A-1"
+                  "body": {
+                    "type": "form",
+                    "api": {
+                      "method": "get",
+                      "url": "/api/admin/v1/account/get_phone_verify_code",
+                      "messages": {
+                        "success": "获取成功"
+                      },
+                      "headers": {
+                        "Authorization": "${token}"
+                      }
+                    },
+                    "redirect": "../${redirect_url}",
+                    "body": [
+                      {
+                        "type": "input-text",
+                        "name": "name",
+                        "label": "姓名："
+                      }
+                    ]
+                  }
                 }
               },
               {
